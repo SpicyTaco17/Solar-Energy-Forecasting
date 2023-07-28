@@ -6,6 +6,8 @@ st.title('Solar Energy Forecasting')
 
 # st.title('Uber pickups in NYC')
 
+Data = ('https://github.com/SpicyTaco17/Solar-Energy-Forecasting.git')
+
 # DATE_COLUMN = 'date/time'
 # DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
 #             'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
