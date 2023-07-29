@@ -2,7 +2,6 @@ from setuptools import find_packages, setup
 import streamlit as st
 import pandas as pd
 import numpy as np
-import xgboost as xgb
 
 st.title('Solar Energy Forecasting')
 
