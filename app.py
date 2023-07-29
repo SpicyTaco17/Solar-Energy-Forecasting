@@ -5,7 +5,7 @@ import numpy as np
 st.title('Solar Energy Forecasting')
 
 source = ('https://github.com/SpicyTaco17/Solar-Energy-Forecasting/blob/main/model.csv')
-# 
+
 model = pd.read_csv(source)
 
 # DATE_COLUMN = 'date/time'
