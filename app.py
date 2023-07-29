@@ -1,4 +1,4 @@
-pip install yourFile.whl
+from setuptools import find_packages, setup
 import streamlit as st
 import pandas as pd
 import numpy as np
