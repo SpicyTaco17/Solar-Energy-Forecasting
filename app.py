@@ -19,6 +19,14 @@ df_total = df_total.drop(columns = ['FR_load_forecast_entsoe_transparency'])
 global_radiation = pd.Series(df_global_radiation)
 df_total = df_total.assign(df_global_radiation = global_radiation)
 
+df_total = df_total.dropna(how='any',axis=0)
+
+ground_truth = df_total['FR_solar_generation_actual'].copy()
+parameter_dataset = df_total.drop('FR_solar_generation_actual', axis=1)
+
+(xTr, xTTest, yTr, yTTest) = train_test_split(parameter_dataset, ground_truth, test_size = .2, shuffle=False)
+(xTrain, xTest, yTrain, yTest) = train_test_split(xTr, yTr, test_size = .4, random_state=17)
+
 # model = pd.read_csv()
 
 # DATE_COLUMN = 'date/time'
