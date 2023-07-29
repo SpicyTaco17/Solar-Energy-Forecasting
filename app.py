@@ -4,9 +4,7 @@ import numpy as np
 
 st.title('Solar Energy Forecasting')
 
-# st.title('Uber pickups in NYC')
-
-Data = ('https://github.com/SpicyTaco17/Solar-Energy-Forecasting.git')
+model = (SpicyTaco17/model.json)
 
 # DATE_COLUMN = 'date/time'
 # DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
