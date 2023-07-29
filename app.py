@@ -4,7 +4,9 @@ import numpy as np
 
 st.title('Solar Energy Forecasting')
 
-model = ('https://github.com/SpicyTaco17/Solar-Energy-Forecasting/blob/main/model.json')
+source = ('https://github.com/SpicyTaco17/Solar-Energy-Forecasting/blob/main/model.json')
+
+model = pd.read_csv(source, nrows = nrows)
 
 # DATE_COLUMN = 'date/time'
 # DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
