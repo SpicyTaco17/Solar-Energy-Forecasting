@@ -4,7 +4,7 @@ import numpy as np
 
 st.title('Solar Energy Forecasting')
 
-model = (spicytaco17/model.json)
+model = (spicytaco17/Solar_forecasting)
 
 # DATE_COLUMN = 'date/time'
 # DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
