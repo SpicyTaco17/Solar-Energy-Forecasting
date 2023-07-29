@@ -4,7 +4,7 @@ import numpy as np
 
 st.title('Solar Energy Forecasting')
 
-source = (https://github.com/SpicyTaco17/Solar-Energy-Forecasting.git)
+source = (github.com/SpicyTaco17/Solar-Energy-Forecasting.git)
 
 model = pd.read_csv(source)
 
