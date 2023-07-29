@@ -1,15 +1,14 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import io
 
 st.title('Solar Energy Forecasting')
 
 source = ('https://github.com/SpicyTaco17/Solar-Energy-Forecasting/blob/main/model.csv')
 
-df_1 = pd.read_csv(io.BytesIO('time_series_60min_singleindex_filtered.csv'))
-df_2 = pd.read_csv(io.BytesIO('weather_data_filtered.csv'))
-df_3 = pd.read_csv(io.BytesIO('timestamp_utc.csv'))
+df_1 = pd.read_csv()
+df_2 = pd.read_csv()
+df_3 = pd.read_csv()
 
 # model = pd.read_csv()
 
