@@ -6,9 +6,9 @@ st.title('Solar Energy Forecasting')
 
 source = ('https://github.com/SpicyTaco17/Solar-Energy-Forecasting/blob/main/model.csv')
 
-df_1 = pd.read_csv()
-df_2 = pd.read_csv()
-df_3 = pd.read_csv()
+df_1 = pd.read_csv('https://raw.githubusercontent.com/SpicyTaco17/Solar-Energy-Forecasting/main/time_series_60min_singleindex_filtered.csv')
+df_2 = pd.read_csv('https://raw.githubusercontent.com/SpicyTaco17/Solar-Energy-Forecasting/main/weather_data_filtered.csv')
+df_3 = pd.read_csv('https://raw.githubusercontent.com/SpicyTaco17/Solar-Energy-Forecasting/main/timestamp_utc.csv')
 
 # model = pd.read_csv()
 
