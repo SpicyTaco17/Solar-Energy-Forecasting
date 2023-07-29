@@ -1,4 +1,5 @@
 from setuptools import find_packages, setup
+pip install autoxgb
 import streamlit as st
 import pandas as pd
 import numpy as np
