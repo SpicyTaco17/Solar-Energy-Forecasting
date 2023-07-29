@@ -1,4 +1,4 @@
-!pip3 install xgboost
+!pip install xgboost
 import streamlit as st
 import pandas as pd
 import numpy as np
