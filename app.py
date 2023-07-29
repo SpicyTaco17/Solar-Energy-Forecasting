@@ -1,3 +1,4 @@
+!pip3 install xgboost
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -6,7 +7,7 @@ st.title('Solar Energy Forecasting')
 
 source = ('https://github.com/SpicyTaco17/Solar-Energy-Forecasting/blob/main/model.json')
 
-model = pd.read_csv("spicytaco17/model")
+# model = pd.read_csv("spicytaco17/model")
 
 # DATE_COLUMN = 'date/time'
 # DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
