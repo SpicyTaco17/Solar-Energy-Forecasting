@@ -4,11 +4,20 @@ import numpy as np
 
 st.title('Solar Energy Forecasting')
 
-source = ('https://github.com/SpicyTaco17/Solar-Energy-Forecasting/blob/main/model.csv')
-
 df_1 = pd.read_csv('https://raw.githubusercontent.com/SpicyTaco17/Solar-Energy-Forecasting/main/time_series_60min_singleindex_filtered.csv')
 df_2 = pd.read_csv('https://raw.githubusercontent.com/SpicyTaco17/Solar-Energy-Forecasting/main/weather_data_filtered.csv')
 df_3 = pd.read_csv('https://raw.githubusercontent.com/SpicyTaco17/Solar-Energy-Forecasting/main/timestamp_utc.csv')
+
+df_total = df_3.join(df_2.iloc[:,-3:]).join(df_1.iloc[:,-3:]).iloc[:,1:]
+df_global_radiation = df_total['FR_radiation_diffuse_horizontal'] + df_total['FR_radiation_direct_horizontal']
+
+df_total = df_total.drop(columns = ['FR_radiation_direct_horizontal'])
+df_total = df_total.drop(columns = ['FR_radiation_diffuse_horizontal'])
+df_total = df_total.drop(columns = ['FR_load_actual_entsoe_transparency'])
+df_total = df_total.drop(columns = ['FR_load_forecast_entsoe_transparency'])
+
+global_radiation = pd.Series(df_global_radiation)
+df_total = df_total.assign(df_global_radiation = global_radiation)
 
 # model = pd.read_csv()
 
