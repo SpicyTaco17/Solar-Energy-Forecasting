@@ -1,4 +1,4 @@
-sudo pip install xgboost == 1.0.1
+from xgboost import XGBRegressor
 import streamlit as st
 import pandas as pd
 import numpy as np
