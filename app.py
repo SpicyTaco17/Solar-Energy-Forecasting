@@ -1,4 +1,3 @@
-!pip install xgboost
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -25,8 +24,13 @@ df_total = df_total.dropna(how='any',axis=0)
 ground_truth = df_total['FR_solar_generation_actual'].copy()
 parameter_dataset = df_total.drop('FR_solar_generation_actual', axis=1)
 
-# (xTr, xTTest, yTr, yTTest) = train_test_split(parameter_dataset, ground_truth, test_size = .2, shuffle=False)
-# (xTrain, xTest, yTrain, yTest) = train_test_split(xTr, yTr, test_size = .4, random_state=17)
+(xTr, xTTest, yTr, yTTest) = train_test_split(parameter_dataset, ground_truth, test_size = .2, shuffle=False)
+(xTrain, xTest, yTrain, yTest) = train_test_split(xTr, yTr, test_size = .4, random_state=17)
+
+xgbmodel = xgb.XGBRegressor()
+xgbmodel.fit(xTrain, yTrain)
+predictions = xgbmodel.predict(xTest)
+predictions_test = xgbmodel.predict(xTTest)
 
 # model = pd.read_csv()
 
