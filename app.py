@@ -1,12 +1,12 @@
 import sklearn
 from sklearn.model_selection import train_test_split
-# import streamlit as st
+import streamlit as st
 import pandas as pd
 import numpy as np
 import xgboost
 from xgboost import XGBRegressor
 
-# st.title('Solar Energy Forecasting')
+st.title('Solar Energy Forecasting')
 
 df_1 = pd.read_csv('https://raw.githubusercontent.com/SpicyTaco17/Solar-Energy-Forecasting/main/time_series_60min_singleindex_filtered.csv')
 df_2 = pd.read_csv('https://raw.githubusercontent.com/SpicyTaco17/Solar-Energy-Forecasting/main/weather_data_filtered.csv')
