@@ -45,7 +45,7 @@ xgbmodel.fit(xTrain, yTrain)
 predictions = xgbmodel.predict(xTest)
 predictions_test = xgbmodel.predict(xTTest)
 
-panels = st.number_input("Number of panels", min_value = 0, value = 0)
+panels = st.number_input("Number of panels", min_value = 0, max_value = 100000000000, value = 0)
 time_utc = st.time_input("Time (UTC)", step = 3600, value = datetime.time(12, 00))
 temp = st.slider("Temperature (°C)", min_value = -20, max_value = 50, value = 15)
 radiance = st.slider("Total radiance (W/m2)", min_value = 0, max_value = 1000, value = 500)
