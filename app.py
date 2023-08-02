@@ -1,12 +1,18 @@
-# import sklearn
-# from sklearn.model_selection import train_test_split
 import streamlit as st
+import datetime
 import pandas as pd
 import numpy as np
 import xgboost as xgb
 from xgboost import XGBRegressor
+import sklearn
+from sklearn.model_selection import train_test_split
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 st.title('Solar Energy Forecasting')
+st.image('https://th.bing.com/th/id/R.d18dc3d25500a1e180088b0d348b3a05?rik=axhPjpc0Xzp41Q&pid=ImgRaw&r=0')
 
 df_1 = pd.read_csv('https://raw.githubusercontent.com/SpicyTaco17/Solar-Energy-Forecasting/main/time_series_60min_singleindex_filtered.csv')
 df_2 = pd.read_csv('https://raw.githubusercontent.com/SpicyTaco17/Solar-Energy-Forecasting/main/weather_data_filtered.csv')
@@ -36,35 +42,95 @@ xgbmodel.fit(xTrain, yTrain)
 predictions = xgbmodel.predict(xTest)
 predictions_test = xgbmodel.predict(xTTest)
 
-# model = pd.read_csv()
+panels = st.number_input("Number of panels", min_value = 0, value = 0)
+time_utc = st.time_input("Time (UTC)", step = 3600, value = datetime.time(12, 00))
+temp = st.slider("Temperature (°C)", min_value = -20, max_value = 50, value = 15)
+radiance = st.slider("Total radiance (W/m2)", min_value = 0, max_value = 1000, value = 500)
 
-# DATE_COLUMN = 'date/time'
-# DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
-#             'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
+numeric_features = ['timestamp', 'FR_temperature', 'df_global_radiation']
 
-# @st.cache_data
-# def load_data(nrows):
-#     data = pd.read_csv(DATA_URL, nrows=nrows)
-#     lowercase = lambda x: str(x).lower()
-#     data.rename(lowercase, axis='columns', inplace=True)
-#     data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
-#     return data
+numeric_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='mean')),
+    ('scaler', StandardScaler())
+])
 
-# data_load_state = st.text('Loading data...')
-# data = load_data(10000)
-# data_load_state.text("Done! (using st.cache_data)")
+preprocessor = ColumnTransformer(transformers=[
+    ('num', numeric_transformer, numeric_features)])
 
-# if st.checkbox('Show raw data'):
-#     st.subheader('Raw data')
-#     st.write(data)
+pipeline = Pipeline(steps=[
+    ('preprocess', preprocessor),
+    ('regression', xgbmodel)
+])
 
-# st.subheader('Number of pickups by hour')
-# hist_values = np.histogram(data[DATE_COLUMN].dt.hour, bins=24, range=(0,24))[0]
-# st.bar_chart(hist_values)
+pipeline.fit(xTrain, yTrain)
 
-# # Some number in the range 0-23
-# hour_to_filter = st.slider('hour', 0, 23, 17)
-# filtered_data = data[data[DATE_COLUMN].dt.hour == hour_to_filter]
+if time_utc == datetime.time(0, 00):
+    time_utc = 0
+elif time_utc == datetime.time(1, 00):
+    time_utc = 1
+elif time_utc == datetime.time(2, 00):
+    time_utc = 2
+elif time_utc == datetime.time(3, 00):
+    time_utc = 3
+elif time_utc == datetime.time(4, 00):
+    time_utc = 4
+elif time_utc == datetime.time(5, 00):
+    time_utc = 5
+elif time_utc == datetime.time(6, 00):
+    time_utc = 6
+elif time_utc == datetime.time(7, 00):
+    time_utc = 7
+elif time_utc == datetime.time(8, 00):
+    time_utc = 8
+elif time_utc == datetime.time(9, 00):
+    time_utc = 9
+elif time_utc == datetime.time(10, 00):
+    time_utc = 10
+elif time_utc == datetime.time(11, 00):
+    time_utc = 11
+elif time_utc == datetime.time(12, 00):
+    time_utc = 12
+elif time_utc == datetime.time(13, 00):
+    time_utc = 13
+elif time_utc == datetime.time(14, 00):
+    time_utc = 14
+elif time_utc == datetime.time(15, 00):
+    time_utc = 15
+elif time_utc == datetime.time(16, 00):
+    time_utc = 16
+elif time_utc == datetime.time(17, 00):
+    time_utc = 17
+elif time_utc == datetime.time(18, 00):
+    time_utc = 18
+elif time_utc == datetime.time(19, 00):
+    time_utc = 19
+elif time_utc == datetime.time(20, 00):
+    time_utc = 20
+elif time_utc == datetime.time(21, 00):
+    time_utc = 21
+elif time_utc == datetime.time(22, 00):
+    time_utc = 22
+elif time_utc == datetime.time(23, 00):
+    time_utc = 23
+elif time_utc == datetime.time(24, 00):
+    time_utc = 24
 
-# st.subheader('Map of all pickups at %s:00' % hour_to_filter)
-# st.map(filtered_data)
+click = st.button('Get Prediction')
+
+def results():
+    user_input = pd.DataFrame()
+    user_input.insert(0, "timestamp", [time_utc])
+    user_input.insert(1, "FR_temperature", [temp])
+    user_input.insert(2, "df_global_radiation", [radiance])
+    prediction = pipeline.predict(user_input)
+    final = prediction
+    if final < 0:
+        final = 0
+    else:
+        final = panels*(prediction / 15856860)
+    st.text(final)
+
+if click:
+    st.subheader('Results (MW):')
+    st.balloons()
+    results()
