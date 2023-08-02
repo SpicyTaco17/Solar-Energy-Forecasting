@@ -12,6 +12,9 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 st.title('Solar Energy Forecasting')
+description1 = st.text('This model is based on data from the "Open Power System Data" platform. If you')
+description2 = st.text('want to use the model, find it on GitHub at: SpicyTaco17/Solar-Energy-Forecasting')
+
 st.image('https://th.bing.com/th/id/R.d18dc3d25500a1e180088b0d348b3a05?rik=axhPjpc0Xzp41Q&pid=ImgRaw&r=0')
 
 df_1 = pd.read_csv('https://raw.githubusercontent.com/SpicyTaco17/Solar-Energy-Forecasting/main/time_series_60min_singleindex_filtered.csv')
